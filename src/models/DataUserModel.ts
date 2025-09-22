@@ -6,37 +6,43 @@ import FormAnswer from './FormAnswersModel'
 })
 
 class DataUser extends Model {
-    @AllowNull
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(50),
     })
     declare name: string
 
-    @AllowNull
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(50)
     })
     declare lastname: string
 
-    @AllowNull
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(50)
     })
     declare maternalsurname: string
 
-    @AllowNull
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(60)
     })
     declare company: string
 
-    @AllowNull
+    @AllowNull(false)
+    @Column({
+        type: DataType.STRING(60)
+    })
+    declare position: string
+
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(80)
     })
     declare email: string
 
-    @AllowNull
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(50)
     })

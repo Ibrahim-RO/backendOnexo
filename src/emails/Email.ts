@@ -7,36 +7,77 @@ type EmailType = {
     company: string
     email: string
     phone: string
+    position: string
 }
+
+type EmailWithAnswers = EmailType & { answers: Array<{ question: string, answer: string, dataUserId: number }> }
 
 export class Email {
 
+    // Correo para el cliente
     static emailForClient = async (user: EmailType) => {
-        const sendEmail = await transport.sendMail({
-            from: 'Onexo <onexo@onexo.com>',
-            to: user.email,
-            subject: 'Recibimos tu mensaje',
-            html: `
-                <p>Hola: <b>${user.name} ${user.lastName} ${user.maternalSurname}</b></p>
-                <p>Nuestro equipo revisará tu información y se pondrá en contacto contigo en un plazo de 24-48 horas para definir los siguientes pasos.</p>
-                <p>Gracias por confiar en nosotros para tu proyecto de software </p>
-                <p>Saludos, Onexo</p>
-            `
-        })
-
-        console.log('Mensaje enviado', sendEmail)
-
+        try {
+            const sendEmail = await transport.sendMail({
+                from: 'rodriguez.o.ibra@gmail.com',
+                to: user.email,
+                subject: 'Recibimos tu mensaje',
+                html: `
+                    <p>Hola: <b>${user.name} ${user.lastName} ${user.maternalSurname}</b></p>
+                    <p>Nuestro equipo revisará tu información y se pondrá en contacto contigo en un plazo de 24-48 horas para definir los siguientes pasos.</p>
+                    <p>Gracias por confiar en nosotros para tu proyecto de software.</p>
+                    <p>Saludos,<br/>Onexo</p>
+                `
+            });
+            console.log('Mensaje enviado al cliente:', sendEmail.messageId);
+        } catch (err) {
+            console.error('Error enviando correo al cliente:', err);
+        }
     }
 
-    static teamEmail = async () => {
-        const email = await transport.sendMail({
-            from: '',
-            to: '',
-            subject: '',
-            html: ``
+    static teamEmail = async (data: EmailWithAnswers) => {
+        try {
+            // Formatear las respuestas si son arrays
+            const formattedAnswers = data.answers.map(a => ({
+                question: a.question,
+                answer: Array.isArray(a.answer) ? a.answer.join(', ') : a.answer
+            }));
 
-        })
+            const email = await transport.sendMail({
+                from: 'rodriguez.o.ibra@gmail.com',
+                to: 'rodriguez.o.ibra@gmail.com',
+                subject: 'Nueva solicitud de contacto',
+                html: `
+                    <div style="font-family: Arial, sans-serif; line-height:1.6; color:#333;">
+                        <h2 style="color:#0056b3;">Nueva solicitud de contacto</h2>
+                        <p>Hola equipo de Onexo,</p>
+                        <p>Se recibió una nueva solicitud de un cliente con la siguiente información:</p>
+                        
+                        <h3>👤 Datos del cliente</h3>
+                        <ul>
+                            <li><strong>Nombre:</strong> ${data.name} ${data.lastName} ${data.maternalSurname}</li>
+                            <li><strong>Correo:</strong> ${data.email}</li>
+                            <li><strong>Teléfono:</strong> ${data.phone}</li>
+                            <li><strong>Empresa:</strong> ${data.company}</li>
+                            <li><strong>Puesto:</strong> ${data.position}</li>
+                        </ul>
 
-        console.log('Mensaje enviado', email)
+                        <h3>📝 Respuestas del formulario</h3>
+                        <ol>
+                            ${formattedAnswers.map(a => `
+                                <li>
+                                    <p><strong>${a.question}</strong></p>
+                                    <p>${a.answer}</p>
+                                </li>
+                            `).join('')}
+                        </ol>
+
+                        <p style="margin-top:20px;">Saludos,<br/>Sistema Onexo</p>
+                    </div>
+                `
+            });
+            console.log('Mensaje enviado al equipo:', email.messageId);
+        } catch (err) {
+            console.error('Error enviando correo al equipo:', err);
+        }
     }
 }

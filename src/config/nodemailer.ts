@@ -2,15 +2,12 @@ import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const config = () => {
-    return {
-        host: process.env.EMAIL_HOST,
-        port: +process.env.EMAIL_PORT,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
+export const transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.GMAIL_USER,        // tu correo Gmail
+        pass: process.env.GMAIL_APP_PASS     // App Password generado en Gmail
     }
-}
-
-export const transport = nodemailer.createTransport(config());
+});
