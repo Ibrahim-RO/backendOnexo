@@ -31,9 +31,7 @@ export class FormController {
                     dataUserId: user.id
                 }))
 
-
                 await FormAnswer.bulkCreate(formattedAnswers);
-                await new Promise((resolve) => setTimeout(resolve, 3000));
                 await Email.teamEmail({ ...infoForm, answers: formattedAnswers })
             }
 
