@@ -11,6 +11,7 @@ type EmailType = {
 }
 
 type EmailWithAnswers = EmailType & { answers: Array<{ question: string, answer: string, dataUserId: number }> }
+type ContactEmailType = Pick<EmailType, 'name' | 'lastName' | 'maternalSurname' | 'email' | 'phone'>
 
 export class Email {
 
@@ -78,6 +79,28 @@ export class Email {
             console.log('Mensaje enviado al equipo:', email.messageId);
         } catch (err) {
             console.error('Error enviando correo al equipo:', err);
+        }
+    }
+
+    static contactEmail = async (data: ContactEmailType) => {
+        try {
+            const email = await transport.sendMail({
+                from: 'rodriguez.o.ibra@gmail.com',
+                to: 'rodriguez.o.ibra@gmail.com',
+                subject: 'Nueva solicitud de contacto',
+                html: `
+                    <p>Hola equipo de Onexo,</p>
+                    <p>Se recibió una nueva solicitud de un cliente con la siguiente información:</p>
+                    <h3>👤 Datos del cliente</h3>
+                        <ul>
+                            <li><strong>Nombre:</strong> ${data.name} ${data.lastName} ${data.maternalSurname}</li>
+                            <li><strong>Correo:</strong> ${data.email}</li>
+                            <li><strong>Teléfono:</strong> ${data.phone}</li>
+                        </ul>
+                `
+            })
+        } catch (error) {
+            console.error('Error enviando correo al equipo:', error);
         }
     }
 }
