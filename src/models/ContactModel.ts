@@ -36,6 +36,12 @@ class Contact extends Model {
     })
     declare phone: string
 
+    @AllowNull(false)
+    @Column({
+        type: DataType.TEXT
+    })
+    declare message: string
+
 }
 
 export default Contact

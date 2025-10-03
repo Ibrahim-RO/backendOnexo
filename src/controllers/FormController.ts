@@ -53,7 +53,8 @@ export class FormController {
                 lastName: contact.lastname,
                 maternalSurname: contact.maternalsurname,
                 email: contact.email,
-                phone: contact.phone
+                phone: contact.phone,
+                message: contact.message
             }
 
             await Email.contactEmail(info)

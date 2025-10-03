@@ -8,15 +8,17 @@ type EmailType = {
     email: string
     phone: string
     position: string
+    message: string
 }
 
-type EmailWithAnswers = EmailType & { answers: Array<{ question: string, answer: string, dataUserId: number }> }
-type ContactEmailType = Pick<EmailType, 'name' | 'lastName' | 'maternalSurname' | 'email' | 'phone'>
+type EmailUserClientType = Pick<EmailType, 'name' | 'lastName' | 'maternalSurname' | 'company' | 'email' | 'phone' | 'position'>
+type EmailWithAnswers = EmailUserClientType & { answers: Array<{ question: string, answer: string, dataUserId: number }> }
+type ContactEmailType = Pick<EmailType, 'name' | 'lastName' | 'maternalSurname' | 'email' | 'phone' | 'message'>
 
 export class Email {
 
     // Correo para el cliente
-    static emailForClient = async (user: EmailType) => {
+    static emailForClient = async (user: EmailUserClientType) => {
         try {
             const sendEmail = await transport.sendMail({
                 from: 'rodriguez.o.ibra@gmail.com',
@@ -97,6 +99,7 @@ export class Email {
                             <li><strong>Correo:</strong> ${data.email}</li>
                             <li><strong>Teléfono:</strong> ${data.phone}</li>
                         </ul>
+                    <p>Mensaje: ${data.message}</p>
                 `
             })
         } catch (error) {
