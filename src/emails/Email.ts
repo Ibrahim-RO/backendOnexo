@@ -25,10 +25,26 @@ export class Email {
                 to: user.email,
                 subject: 'Recibimos tu mensaje',
                 html: `
+                    <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
+                    <!-- Imagen al inicio -->
+                    <img src="https://res.cloudinary.com/dykhnd90m/image/upload/v1759513811/img_w6og7q.png" alt="ONEXO" />
+
+
                     <p>Hola: <b>${user.name} ${user.lastName} ${user.maternalSurname}</b></p>
-                    <p>Nuestro equipo revisará tu información y se pondrá en contacto contigo en un plazo de 24-48 horas para definir los siguientes pasos.</p>
-                    <p>Gracias por confiar en nosotros para tu proyecto de software.</p>
-                    <p>Saludos,<br/>Onexo</p>
+                    <p>Hoy diste un paso importante: abriste la puerta a un mundo donde la innovación no es complicada, sino una herramienta poderosa para hacer crecer tu empresa.</p>
+                    <p><b>En ONEXO creemos que la tecnología debe ser clara, útil y accionable.</b> Muy pronto nuestro equipo se pondrá en contacto contigo para conocerte mejor y mostrarte como transformar tus procesos en resultados reales.</p>
+
+                    <!-- Botón verde -->
+                    <a href="${process.env.FRONTEND_URL}/success-stories"
+                        style="display: inline-block; background-color: #16a34a; color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; margin: 16px 0; transition: background-color 0.3s ease;">
+                        → EXPLORAR CASOS DE ÉXITOS
+                    </a>
+
+                    <p>✨ Empresas como la tuya ya confiaron en nosotros y transformaron su operación. <b>Este es solo el comienzo. La innovación ya está de tu lado</b></p>
+
+                    <p>Conectemos pronto,</p>
+                    <p><b>Equipo ONEXO</b></p>
+                    </div>
                 `
             });
             console.log('Mensaje enviado al cliente:', sendEmail.messageId);
