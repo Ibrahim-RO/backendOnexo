@@ -23,7 +23,7 @@ export class Email {
     static emailForClient = async (user: EmailUserClientType) => {
         try {
             const sendEmail = await transport.sendMail({
-                from: `"ONEXO" <${process.env.CPANEL_USER}>`,
+                from: `"ONEXO" marketing@onexo.mx`,
                 to: user.email,
                 replyTo: 'marketing@onexo.mx', 
                 bcc: 'marketing@onexo.mx',
@@ -58,7 +58,7 @@ export class Email {
             }))
 
             const email = await transport.sendMail({
-                from: `"ONEXO" <${process.env.CPANEL_USER}>`,
+                from: `"ONEXO" marketing@onexo.mx`,
                 to: 'marketing@onexo.mx',
                 replyTo: 'marketing@onexo.mx', 
                 bcc: 'marketing@onexo.mx',                
@@ -96,7 +96,7 @@ export class Email {
     static contactEmail = async (data: ContactEmailType) => {
         try {
             const email = await transport.sendMail({
-                from: `"ONEXO" <${process.env.CPANEL_USER}>`,
+                from: `"ONEXO" marketing@onexo.mx`,
                 to: 'marketing@onexo.mx',
                 replyTo: 'marketing@onexo.mx', 
                 bcc: 'marketing@onexo.mx',             

@@ -3,14 +3,14 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const transport = nodemailer.createTransport({
-    host: 'mail.tudominio.com', 
-    port: 465,                  
-    secure: true,               
+    host: "smtp.office365.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: process.env.CPANEL_USER, 
-        pass: process.env.CPANEL_PASS  
+        user: "marketing@onexo.mx",
+        pass: "_84=.cdN-cGT"
     },
     tls: {
-        rejectUnauthorized: false 
-    }
+        ciphers: "SSLv3",
+    },
 })
