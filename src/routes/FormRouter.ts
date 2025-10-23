@@ -18,8 +18,6 @@ router.post("/contact",
         .notEmpty().withMessage('El email es obligatorio'),
     body('phone')
         .notEmpty().withMessage('El télefono es obligatorio'),
-    body('message')
-        .notEmpty().withMessage('El mensaje es obligatorio'),
     handleInputErrors,
     FormController.contactForm
 )
