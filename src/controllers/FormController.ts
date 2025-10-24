@@ -43,25 +43,54 @@ export class FormController {
         }
     }
 
-    static contactForm = async (req:Request, res: Response) => {
+    static contactForm = async (req: Request, res: Response) => {
         try {
             const contact = new Contact(req.body)
             await contact.save()
-            
+
             const info = {
                 name: contact.name,
                 lastName: contact.lastname,
                 maternalSurname: contact.maternalsurname,
                 email: contact.email,
                 phone: contact.phone,
-                message: contact.message
+                message: contact.message 
+            }
+
+            await Email.contactEmail(info) 
+            res.json({ message: 'Información enviada correctamente' })
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Error al enviar el correo", details: error.message });
+        }
+    }
+
+    static contactFormWithoutMessage = async (req: Request, res: Response) => {
+        try {
+            const contactData = {
+                ...req.body,
+                message: "" 
+            }
+
+            const contact = new Contact(contactData)
+            await contact.save()
+
+            const info = {
+                name: contact.name,
+                lastName: contact.lastname,
+                maternalSurname: contact.maternalsurname,
+                email: contact.email,
+                phone: contact.phone,
+                message: ""
             }
 
             await Email.contactEmail(info)
-            res.json('Información enviada correctamente')
+            res.json({ message: 'Información enviada correctamente' })
+
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: "Error al enviar el correo" });
+            res.status(500).json({ error: "Error al enviar el correo", details: error.message });
         }
     }
 
