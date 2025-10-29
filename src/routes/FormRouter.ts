@@ -5,6 +5,10 @@ import { handleInputErrors } from "../middleware/validation";
 
 const router = Router()
 
+router.get('/', (req, res) => {
+    res.send("Hola mundo")
+})
+
 router.post("/submissions", FormController.createForm)
 
 router.post("/contact", 

@@ -26,7 +26,6 @@ export class Email {
                 from: `"ONEXO" marketing@onexo.mx`,
                 to: user.email,
                 replyTo: 'marketing@onexo.mx', 
-                bcc: 'marketing@onexo.mx',
                 subject: 'Recibimos tu mensaje',
                 html: `
                     <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
@@ -60,8 +59,7 @@ export class Email {
             const email = await transport.sendMail({
                 from: `"ONEXO" marketing@onexo.mx`,
                 to: 'marketing@onexo.mx',
-                replyTo: 'marketing@onexo.mx', 
-                bcc: 'marketing@onexo.mx',                
+                replyTo: 'marketing@onexo.mx',              
                 subject: 'Nueva solicitud de contacto',
                 html: `
                     <div style="font-family: Arial, sans-serif; line-height:1.6; color:#333;">
@@ -98,8 +96,7 @@ export class Email {
             const email = await transport.sendMail({
                 from: `"ONEXO" marketing@onexo.mx`,
                 to: 'marketing@onexo.mx',
-                replyTo: 'marketing@onexo.mx', 
-                bcc: 'marketing@onexo.mx',             
+                replyTo: 'marketing@onexo.mx',          
                 subject: 'Nueva solicitud de contacto',
                 html: `
                     <p>Hola equipo de Onexo,</p>
