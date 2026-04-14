@@ -54,10 +54,10 @@ export class FormController {
                 maternalSurname: contact.maternalsurname,
                 email: contact.email,
                 phone: contact.phone,
-                message: contact.message 
+                message: contact.message
             }
 
-            await Email.contactEmail(info) 
+            await Email.contactEmail(info)
             res.json({ message: 'Información enviada correctamente' })
 
         } catch (error) {
@@ -70,7 +70,7 @@ export class FormController {
         try {
             const contactData = {
                 ...req.body,
-                message: "" 
+                message: ""
             }
 
             const contact = new Contact(contactData)
@@ -86,6 +86,39 @@ export class FormController {
             }
 
             await Email.contactEmail(info)
+            res.json({ message: 'Información enviada correctamente' })
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Error al enviar el correo", details: error.message });
+        }
+    }
+
+    static masterClassController = async (req: Request, res: Response) => {
+        try {
+            const contactData = {
+                ...req.body,
+                message: ""
+            }
+            
+            const info = {
+                fullName: contactData.fullName,
+                corporateEmail: contactData.corporateEmail,
+                phone: contactData.phone,
+                positionLevel: contactData.positionLevel,
+                jobTitle: contactData.jobTitle,
+                company: contactData.company,
+                industry: contactData.industry,
+                employeeRange: contactData.employeeRange,
+                usesAutomationOrAI: contactData.usesAutomationOrAI,
+                mainChallenge: contactData.mainChallenge,
+                firstAIImplementationArea: contactData.firstAIImplementationArea,
+                implementationTimeline: contactData.implementationTimeline,
+                confirmsAIImplementationInterest: contactData.confirmsAIImplementationInterest,
+                wantsRoadmapInformation: contactData.wantsRoadmapInformation
+            }
+
+            await Email.workshopLeadEmail(info)
             res.json({ message: 'Información enviada correctamente' })
 
         } catch (error) {

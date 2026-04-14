@@ -38,4 +38,23 @@ router.post("/contact-simple",
     FormController.contactFormWithoutMessage
 )
 
+router.post("/master-class", 
+    body('fullName').notEmpty().withMessage('El nombre es obligatorio'),
+    body('corporateEmail').notEmpty().withMessage('La corporación es obligatoria'),
+    body('phone').notEmpty().withMessage('El teléfono es obligatorio'),
+    body('positionLevel').notEmpty().withMessage('El cargo es obligatorio'),
+    body('jobTitle').notEmpty().withMessage('El puesto es obligatorio'),
+    body('company').notEmpty().withMessage('La empresa es obligatoria'),
+    body('industry').notEmpty().withMessage('La industria/giro es obligatoria'),
+    body('employeeRange').notEmpty().withMessage('Campo requerido'),
+    body('usesAutomationOrAI').notEmpty().withMessage('Campo requerido'),
+    body('mainChallenge').notEmpty().withMessage('Campo requerido'),
+    body('firstAIImplementationArea').notEmpty().withMessage('Campo requerido'),
+    body('implementationTimeline').notEmpty().withMessage('Campo requerido'),
+    body('confirmsAIImplementationInterest').notEmpty().withMessage('Campo requerido'),
+    body('wantsRoadmapInformation').notEmpty().withMessage('Campo requerido'),
+    handleInputErrors,
+    FormController.masterClassController
+)
+
 export default router
