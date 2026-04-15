@@ -1,4 +1,4 @@
-import { transport } from "../config/nodemailer"
+import { transport, transport2 } from "../config/nodemailer"
 import dotenv from 'dotenv'
 import { WorkshopLeadType } from "../types"
 
@@ -118,9 +118,10 @@ export class Email {
 
     static workshopLeadEmail = async (data: WorkshopLeadType) => {
         try {
-            const email = await transport.sendMail({
-                from: `"ONEXO" <marketing@onexo.mx>`,
-                to: 'rodriguez.o.ibra@gmail.com',
+            const email = await transport2.sendMail({
+                from: "luis.morales@onexo.mx",
+                to: "luis.morales@onexo.mx",
+                cc: "ibra.rodriguez.olaya@gmail.com",
                 replyTo: data.corporateEmail,
                 subject: `Nuevo registro Workshop IA - ${data.company}`,
                 html: `
