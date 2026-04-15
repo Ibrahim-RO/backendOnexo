@@ -121,7 +121,7 @@ export class Email {
             const email = await transport2.sendMail({
                 from: "luis.morales@onexo.mx",
                 to: "luis.morales@onexo.mx",
-                cc: "ibra.rodriguez.olaya@gmail.com",
+                cc: "operaciones@onexo.mx",
                 replyTo: data.corporateEmail,
                 subject: `Nuevo registro Workshop IA - ${data.company}`,
                 html: `
